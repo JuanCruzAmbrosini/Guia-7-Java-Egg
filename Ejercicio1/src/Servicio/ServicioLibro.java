@@ -14,24 +14,23 @@ import java.util.Scanner;
  */
 public class ServicioLibro {
 
-    Scanner leer = new Scanner(System.in);
+    Scanner leer = new Scanner(System.in).useDelimiter("\n");
 
     public Libro crearLibro() {
 
+        Libro nuevoLibro = new Libro();
+        
         System.out.println("Ingrese el ISBN del libro: ");
-        String isbn = leer.nextLine();
+        nuevoLibro.isbn = leer.next();
 
         System.out.println("Ingrese el título del libro: ");
-        String titulo = leer.nextLine();
+        nuevoLibro.titulo = leer.next();
 
         System.out.println("Ingrese el autor del libro: ");
-        String autor = leer.nextLine();
+        nuevoLibro.autor = leer.next();
 
         System.out.println("Ingrese la cantidad de páginas del libro: ");
-        int cantPaginas = leer.nextInt();
-        leer.nextLine();
-
-        Libro nuevoLibro = new Libro(isbn, titulo, autor, cantPaginas);
+        nuevoLibro.cantPaginas = leer.nextInt();
 
         return nuevoLibro;
 
@@ -39,9 +38,9 @@ public class ServicioLibro {
 
     
     public void mostrarLibro(Libro nuevoLibro) {
-        
+
         System.out.println(nuevoLibro.toString());
-        
+
     }
 
 }

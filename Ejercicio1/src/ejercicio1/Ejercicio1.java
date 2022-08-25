@@ -22,7 +22,7 @@ public class Ejercicio1 {
     public static void main(String[] args) {
 
         ServicioLibro servLibro1 = new ServicioLibro();
-
+        
         System.out.println("Libro 1: ");
 
         Libro libro1 = servLibro1.crearLibro();
@@ -30,7 +30,7 @@ public class Ejercicio1 {
         servLibro1.mostrarLibro(libro1);
 
         ServicioLibro servLibro2 = new ServicioLibro();
-
+        
         System.out.println("Libro 2: ");
 
         Libro libro2 = servLibro2.crearLibro();
