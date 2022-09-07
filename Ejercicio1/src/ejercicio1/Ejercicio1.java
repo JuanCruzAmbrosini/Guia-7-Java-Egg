@@ -29,13 +29,11 @@ public class Ejercicio1 {
 
         servLibro1.mostrarLibro(libro1);
 
-        ServicioLibro servLibro2 = new ServicioLibro();
-        
         System.out.println("Libro 2: ");
 
-        Libro libro2 = servLibro2.crearLibro();
+        Libro libro2 = servLibro1.crearLibro();
 
-        servLibro2.mostrarLibro(libro2);
+        servLibro1.mostrarLibro(libro2);
 
     }
 
