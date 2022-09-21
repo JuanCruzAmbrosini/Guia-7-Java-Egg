@@ -59,7 +59,6 @@ Mensaje: Lo sentimos, no hay más oportunidades
  */
 package ejercicioextra6;
 
-import Entities.Ahorcado;
 import Servicies.AhorcadoService;
 
 /**
@@ -72,10 +71,10 @@ public class EjercicioExtra6 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        AhorcadoService as = new AhorcadoService();
         
-        Ahorcado Ahorcado1 = as.crearJuego();
-        boolean asdas = as.encontradas("a", Ahorcado1);
+        AhorcadoService as = new AhorcadoService();
+            
+        as.juego();
     }
     
 }

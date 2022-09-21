@@ -84,13 +84,16 @@ public class AhorcadoService {
         String palabraBuscar = leer.next();
 
         String[] palabraVector = new String[palabraBuscar.length()];
+        String[] solucionVector = new String[palabraBuscar.length()];
 
         for (int i = 0; i < palabraBuscar.length(); i++) {
 
             palabraVector[i] = palabraBuscar.substring(i, i + 1);
+            solucionVector[i] = "-";
         }
 
         ahorcadoEj.setPalabra(palabraVector);
+        ahorcadoEj.setSolucion(solucionVector);
 
         System.out.println("Ingrese la cantidad de intentos: ");
         ahorcadoEj.setCantidadIntentos(leer.nextInt());
@@ -105,22 +108,83 @@ public class AhorcadoService {
         System.out.println("La longitud de la palabra a encontrar es: " + ahorcadoEj.getPalabra().length);
     }
 
-    public void buscar(String letra, Ahorcado ahorcadoEj) {
+    public boolean encontradas(String letra, Ahorcado ahorcadoEj) {
 
-        if (Arrays.asList(ahorcadoEj.getPalabra()).contains(letra)) {
-            System.out.println("La letra elegida está contenida en la palabra.");
+        int contador = 0;
+        int repetidas = 0;
+
+        String[] solucionVector = ahorcadoEj.getSolucion();
+
+        for (int i = 0; i < ahorcadoEj.getPalabra().length; i++) {
+
+            if (letra.equalsIgnoreCase(ahorcadoEj.getPalabra()[i]) && !letra.equalsIgnoreCase(ahorcadoEj.getSolucion()[i]) && letra.length() == 1) {
+                contador++;
+
+                solucionVector[i] = letra;
+
+            } else if (letra.equalsIgnoreCase(ahorcadoEj.getPalabra()[i]) && letra.equalsIgnoreCase(ahorcadoEj.getSolucion()[i])) {
+
+                repetidas++;
+            }
+        }
+
+        ahorcadoEj.setSolucion(solucionVector);
+
+        if (contador != 0) {
+
+            ahorcadoEj.setLetrasEncontradas(ahorcadoEj.getLetrasEncontradas() + contador);
+
+            System.out.println("La letra está contenida dentro de la palabra.");
+            System.out.println("Número de letras (encontradas, faltantes): ( " + ahorcadoEj.getLetrasEncontradas() + ", " + (ahorcadoEj.getPalabra().length - ahorcadoEj.getLetrasEncontradas()) + " )");
+
+            System.out.println(Arrays.toString(ahorcadoEj.getSolucion()));
+
+            return true;
+
+        } else if (repetidas != 0) {
+
+            System.out.println("Escribió una letra repetida. Perdió una chance por gil.");
+            return false;
 
         } else {
 
-            System.out.println("La letra elegida NO está contenida en la palabra.");
+            System.out.println("La letra NO está contenida dentro de la palabra.");
+            System.out.println("Perdió una chance.");
+
+            return false;
         }
     }
-    
-    public boolean encontradas ( String letra, Ahorcado ahorcadoEj ){
-        
-        int posicion = Arrays.binarySearch(ahorcadoEj.getPalabra(), letra);
-        System.out.println(posicion);
-        
-        return true;
+
+    public void intentos(Ahorcado ahorcadoEj) {
+
+        System.out.println("Le quedan " + ahorcadoEj.getCantidadIntentos() + " intentos.");
+    }
+
+    public void juego() {
+
+        Ahorcado ahorcadoEj = crearJuego();
+
+        System.out.println("------------------------------------------");
+
+        longitud(ahorcadoEj);
+
+        while (ahorcadoEj.getCantidadIntentos() != 0 && ahorcadoEj.getLetrasEncontradas() != ahorcadoEj.getPalabra().length) {
+
+            System.out.println("Ingrese una letra: ");
+
+            String letra = leer.next();
+
+            boolean encontrarLetra = encontradas(letra, ahorcadoEj);
+
+            if (!encontrarLetra) {
+
+                ahorcadoEj.setCantidadIntentos(ahorcadoEj.getCantidadIntentos() - 1);
+            }
+
+            intentos(ahorcadoEj);
+
+            System.out.println("------------------------------------------");
+
+        }
     }
 }

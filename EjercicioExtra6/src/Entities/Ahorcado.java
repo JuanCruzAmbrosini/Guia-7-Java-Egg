@@ -64,18 +64,20 @@ package Entities;
  * @author Juan Cruz
  */
 public class Ahorcado {
-    
-    private String [ ] palabra;
-    private int letrasEncontradas;        
+
+    private String[] palabra;
+    private int letrasEncontradas;
     private int cantidadIntentos;
+    private String[] solucion;
 
     public Ahorcado() {
     }
 
-    public Ahorcado(String[] palabra, int letrasEncontradas, int cantidadIntentos) {
+    public Ahorcado(String[] palabra, int letrasEncontradas, int cantidadIntentos, String[] solucion) {
         this.palabra = palabra;
         this.letrasEncontradas = letrasEncontradas;
         this.cantidadIntentos = cantidadIntentos;
+        this.solucion = solucion;
     }
 
     public String[] getPalabra() {
@@ -98,14 +100,21 @@ public class Ahorcado {
         return cantidadIntentos;
     }
 
+    public String[] getSolucion() {
+        return solucion;
+    }
+
+    public void setSolucion(String[] solucion) {
+        this.solucion = solucion;
+    }
+
     public void setCantidadIntentos(int cantidadIntentos) {
         this.cantidadIntentos = cantidadIntentos;
     }
 
     @Override
     public String toString() {
-        return "Ahorcado{" + "Palabra =" + palabra + ", Letras Encontradas =" + letrasEncontradas + ", Cantidad Intentos =" + cantidadIntentos + '}';
+        return "Ahorcado{" + "palabra=" + palabra + ", letrasEncontradas=" + letrasEncontradas + ", cantidadIntentos=" + cantidadIntentos + ", solucion=" + solucion + '}';
     }
-    
     
 }
